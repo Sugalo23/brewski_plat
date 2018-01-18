@@ -4,14 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
-    <link href="css/main.css" rel="stylesheet" type="text/css" />
-    <script src="js/main.js"></script>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="grid.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+
   </head>
   <body>
     
-    <div id="map"></div>
+    <header role="banner"></header>
     
-    
+    <div id="wrapper">
+      
+
+      <div id="map"></div>
+
+      
+      <div class="row">
+        <div class="col-8">
+          <div class="box gray" id="content">content
+
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="box gray" id="reviews">reviews</div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-12">
+      <div id="gallery">gallery</div>
+      </div>
+      </div>
+    </div>
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdnVxNFuSRgdgvE2xeSEsqXIltKpbHBa4&libraries=places&callback=initMap" async defer></script>
 
