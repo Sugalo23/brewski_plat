@@ -10,7 +10,7 @@ function initMap() {
       pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      }
+      };
       map = new google.maps.Map(document.getElementById('map'), {
         center: myLocation,
         zoom: 13
@@ -30,28 +30,45 @@ function initMap() {
         keyword: 'brewery',
         types: ['bar']
       }, callback);
-    })
+    });
   }
 }
 
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-    }
-  }
+    results.forEach(createMarker);
+ }
 }
 
 function createMarker(place) {
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,
-    position: place.geometry.location
+    icon: {
+      url: 'http://maps.gstatic.com/mapfiles/circle.png',
+      anchor: new google.maps.Point(10, 10),
+      scaledSize: new google.maps.Size(10, 17)
+    },
+      position: place.geometry.location
   });
+    marker.addListener('click', function() {
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infoWindow.setContent(place.name);
-    infoWindow.open(map, this);
-  });
+  var request = {
+    reference: place.reference
+  };
+  var service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, function(details, status) {
+      infoWindow.setContent([
+      details.name,
+      details.formatted_address,
+      details.website,
+      details.rating,
+      details.formatted_phone_number].join("<br />"));
+      
+      infoWindow.open(map, marker);
+    });
+  })
 }
+
 initMap();
+
