@@ -1,9 +1,19 @@
 html, body {
         height: 100%;
-        margin: 0;
+        margin: auto;
         padding: 0;
       }
-      
+
+#wrapper {
+        height: 100%;
+        margin: auto;
+        padding: 0;
+      }
+
 #map {
         height: 40%;
       }
+      
+.gray {
+  background-color: #dddddd;
+}
