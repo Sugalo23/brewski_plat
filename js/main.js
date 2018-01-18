@@ -45,15 +45,9 @@ function createMarker(place) {
   var marker = new google.maps.Marker({
     map: map,
     icon: {
-<<<<<<< HEAD
       url: 'http://image.ibb.co/gR2wCR/beer_mug.png',
       anchor: new google.maps.Point(10, 10),
       scaledSize: new google.maps.Size(30, 36)
-=======
-      url: 'http://maps.gstatic.com/mapfiles/circle.png',
-      anchor: new google.maps.Point(10, 10),
-      scaledSize: new google.maps.Size(10, 17)
->>>>>>> 4e05634bcd917c8894f8871a014d1e060b2eb62f
     },
       position: place.geometry.location
   });
@@ -77,9 +71,3 @@ function createMarker(place) {
 }
 
 initMap();
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 4e05634bcd917c8894f8871a014d1e060b2eb62f
