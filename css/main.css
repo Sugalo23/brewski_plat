@@ -11,9 +11,50 @@ html, body {
       }
 
 #map {
-        height: 40%;
+        height: 60%;
       }
       
 .gray {
   background-color: #dddddd;
+}
+
+#pub_info {
+}
+
+.place-img {
+  width: 100%;
+  height: 75px;
+  top: 0;
+  left: 0;
+}
+#shopping-list-item {
+  width: 250px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.my-pub-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.my-pub-list > li {
+  margin-bottom: 20px;
+  border: 1px solid grey;
+  padding: 20px;
+}
+
+.my-pub-list {
+  display: block;
+  color: grey;
+  font-style: italic;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.my-pub-list__visited {
+  text-decoration: line-through;
 }
