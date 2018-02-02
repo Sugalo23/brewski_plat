@@ -1,33 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>The Brewski Plat</title>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <link href="css/grid.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT:400,700" rel="stylesheet"> 
+    
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
 
   </head>
   <body>
-  <header role="banner"></header>
+  <header role="banner" id="header">
+      <div id="header_container">
+        <img src="http://image.ibb.co/dNjrr6/beer_logo.png" class="logo" alt="Pub Crawler" border="0">
+      </div>
+    </header>
     
     <div id="wrapper">
-    <div id="map"></div>
-    
-    <div class="row">
+      
+    <div class="map-bg">
+      <div id="map"></div>
+    </div>
+    <div class="coral-bg"></div>
+      
+      <div class="row">
         <div class="col-8">
-          <div class="box" id="pub_info"></div>
+          <div class="pub_container" id="pub_info"></div>
         </div>
         <div class="col-4">
-          <div class="box" id="pub_list">
+          <div class="" id="pub_list">
             
             <ul class="my-pub-list" id="my-pub-list"></ul>
       
           </div>
         </div>
       </div>
+      
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdnVxNFuSRgdgvE2xeSEsqXIltKpbHBa4&libraries=places&callback=initMap" async defer></script>
 

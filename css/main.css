@@ -1,39 +1,127 @@
 html, body {
-        height: 100%;
-        margin: auto;
-        padding: 0;
-      }
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  font-family: 'Old Standard TT', serif;
+}
+
+.black {
+  color: #000000;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.logo {
+  max-width: 100%;
+  position: relative;
+  bottom: -70px;
+  display: block;
+  margin: 0 auto;
+}
+
+h1, h2 {
+  color: #ffffff;
+  margin: 0px;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 24px;
+}
 
 #wrapper {
-        height: 100%;
-        margin: auto;
-        padding: 0;
-      }
+  height: 100%;
+  padding: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+      
+#header {
+  background: #1a1a1a;
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
+  border-bottom: #d8a03e solid 2px;
+}
+
+#header_container {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index:2;
+}
+
+.coral-bg {
+  height: 60px;
+  background-color: #1a1a1a;
+  border-top: #d8a03e solid 2px;
+}
+
+.map-bg {
+  background-image: url("http://preview.ibb.co/cWufjR/bg.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position-y: 40% 60%;
+  width: 100%;
+  height: 60%;
+  padding: 0 20px 0 20px;
+}
 
 #map {
-        height: 60%;
-      }
-      
-.gray {
-  background-color: #dddddd;
-}
-
-#pub_info {
-}
-
-.place-img {
-  width: 100%;
-  height: 75px;
-  top: 0;
-  left: 0;
-}
-#shopping-list-item {
-  width: 250px;
-}
-
-.container {
-  max-width: 600px;
   margin: 0 auto;
+  max-width: 1000px;
+  height: 100%;
+  position: relative;
+  z-index:1;
+}
+      
+.pub_container {
+  position: relative;
+  top: -25px;
+  width: 100%;
+  display: table;
+}
+
+.center-cropped {
+  object-fit: cover;
+  object-position: 60% 40%;
+  height: 120px;
+  width: 100%;
+}
+
+.pub-photo {
+  height: 120px;
+}
+
+.pub-name {
+  background: #1a1a1a;
+  padding: 15px;
+}
+
+.pub-details {
+  padding: 15px;
+}
+
+.right {
+ float: right;  
+}
+
+a.pub-link:link, a.pub-link:visited, a.pub-link:active {
+    color: #F8F8F8;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+a.pub-link:hover {
+    color: #ffffff;
 }
 
 .my-pub-list {
@@ -44,17 +132,61 @@ html, body {
 .my-pub-list > li {
   margin-bottom: 20px;
   border: 1px solid grey;
-  padding: 20px;
+  padding: 15px;
 }
 
 .my-pub-list {
   display: block;
-  color: grey;
-  font-style: italic;
-  font-size: 20px;
   margin-bottom: 15px;
 }
 
 .my-pub-list__visited {
   text-decoration: line-through;
+}
+
+.pub-details {
+  background: #F8F8F8;
+}
+
+.main-btn {
+  background: #3696b1;
+  border: 1px #3facca solid;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 15px;
+  font-family: 'Old Standard TT', serif;
+}
+
+.main-btn:hover {
+    background: #3facca;
+}
+
+.info-btn {
+  background: #ffca28;
+  border: 1px #d8a03e solid;
+  color: white;
+  padding: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  cursor: pointer;
+  margin-top: 15px;
+  font-family: 'Old Standard TT', serif;
+}
+
+.pub-name-list {
+  font-family: 'Old Standard TT', serif;
+  font-size: 14px;
+}
+
+.pub-controls {
+  float: right;
+}
+
+.pub-delete {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
 }
