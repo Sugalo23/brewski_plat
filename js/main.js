@@ -142,8 +142,8 @@ function initMap() {
       service.nearbySearch({
         location: myLocation, //Uses geolocation to find the following
         radius: 100000,
-        keyword: 'brewery',
-        types: ['bar']
+        keyword: ['bar', 'brewery'],
+        types: ['bar', 'restaurant']
       }, callback);
     });
   }
@@ -181,13 +181,21 @@ function createMarker(place) {
       '<div class="pub-details">' + details.vicinity,
 //      details.opening_hours.open_now = "Open Now",
 //      details.rating,
+details.place_id,
+details.geometry.location,
       details.formatted_phone_number + 
-      '<div><button type="submit" id="button" class="main-btn">Add to Pub List</button></br>' +
+      '<div><button type="submit" id="button" class="main-btn">Add to Pub List</button><button type="submit" id="directions" class="main-btn">Directions</button></br>' +
       '</div>'].join("<br />"));
+      
       $('#button').click(function(e) {
                e.preventDefault();
                 $('#pub_list ul').append('<li><span class="pub-name-list">' + details.name + '</span><div class="pub-controls"><img src="http://image.ibb.co/b45EB6/Red_X_in_circle_small.png" class="pub-delete" alt="Click X to Remove Pub from List" border="0"></div></li>');
             });
+
+      $('#directions').click(function(e) {
+        e.preventDefault();
+          window.open('https://www.google.com/maps/dir/Current+Location/' + details.geometry.location);
+});
 
             infoWindow.open(map, marker);
         });
@@ -195,20 +203,9 @@ function createMarker(place) {
         $('.my-pub-list').on('click', '.pub-delete', function(event) {
             $(this).closest('li').remove();
         });
-//        $('.my-pub-list').on('click', '.pub-toggle', function(event) {
-//            $(this).closest('li').find('.pub-name-list').toggleClass('my-pub-list__visited');
-//        });
     });
 }
 
-function savedPubs() {
-  
-}
-
-
-
 initMap();
-
-// 
 
 
