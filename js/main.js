@@ -2,7 +2,6 @@ var map;
 var infoWindow;
 var pos;
 
-
 function initMap() {
 
   if (navigator.geolocation) { //GEO LOCATION, FINDS USERS LOCATION
@@ -128,7 +127,7 @@ function initMap() {
             "elementType": "labels.text.fill",
             "stylers": [{ "color": "#92998d" }]
   }]
-});
+      });
       
       infoWindow = new google.maps.InfoWindow({
         map: map,
@@ -136,17 +135,18 @@ function initMap() {
       infoWindow.setPosition(pos);
       infoWindow.setContent('You are here.');
       map.setCenter(pos);
-      var myLocation = pos; //Sets variable to geo location long and lat co-ordinates.
-
-      var service = new google.maps.places.PlacesService(map);
-      service.nearbySearch({
-        location: myLocation, //Uses geolocation to find the following
-        radius: 100000,
-        keyword: ['bar', 'brewery'],
-        types: ['bar', 'restaurant']
-      }, callback);
+      
+        var myLocation = pos; //Sets variable to geo location long and lat co-ordinates.
+        var service = new google.maps.places.PlacesService(map);
+          service.nearbySearch({
+          location: myLocation, //Uses geolocation to find the following
+          radius: 100000,
+          keyword: ['bar', 'brewery', 'beer', 'liquor'],
+          types: ['bar', 'restaurant']
+          }, callback);
     });
   }
+  getPubs();
 }
 
 function callback(results, status) {
@@ -164,46 +164,80 @@ function createMarker(place) {
       anchor: new google.maps.Point(10, 10),
       scaledSize: new google.maps.Size(30, 36)
     },
-      position: place.geometry.location
+    position: place.geometry.location
   });
     marker.addListener('click', function() {
 
-  var request = {
-    reference: place.reference
-  };
-  var service = new google.maps.places.PlacesService(map);
-    service.getDetails(request, function(details, status) {
-  var photoUrl = details.photos[0].getUrl({maxWidth: 640});
-      infoWindow.setContent(details.name);
-      $("#pub_info").empty().append([
-      '<div class="pub-photo"><img src="' + photoUrl + '"class="center-cropped"></div>' +
-      '<div class="pub-name"><a href="' + details.url + '" class="pub-link">' + details.name + '</a><span class="right white">' + details.rating + '</span></div>' + 
-      '<div class="pub-details">' + details.vicinity,
-//      details.opening_hours.open_now = "Open Now",
-//      details.rating,
-details.place_id,
-details.geometry.location,
-      details.formatted_phone_number + 
-      '<div><button type="submit" id="button" class="main-btn">Add to Pub List</button><button type="submit" id="directions" class="main-btn">Directions</button></br>' +
-      '</div>'].join("<br />"));
+      var request = {
+        reference: place.reference
+      };
+      var service = new google.maps.places.PlacesService(map);
+  
+      service.getDetails(request, function(details, status) {
+        var photoUrl = details.photos[0].getUrl({maxWidth: 640});
+          infoWindow.setContent(details.name);
+          $("#pub_info").empty().append([
+          '<div class="pub-photo">' +
+          '<img src="' + photoUrl + '"class="center-cropped"></div>' +
+          '<div class="pub-name">' +
+          '<a href="' + details.url + '" class="pub-link">' + details.name + '</a>' +
+          '<span class="right white">' + details.rating + '</span></div>' + 
+          '<div class="pub-details">' + details.vicinity,
+//        details.opening_hours.open_now = "Open Now",
+//        details.rating,
+//        details.place_id,
+//        details.geometry.location,
+          details.formatted_phone_number + 
+          '<div>' +
+          '<button type="submit" role="link" id="button" class="main-btn">Add to Pub List</button></br>' +
+          '<button type="submit" role="link" id="directions" class="main-btn">Directions</button></br>' +
+          '</div>'].join("<br />"));
       
-      $('#button').click(function(e) {
-               e.preventDefault();
-                $('#pub_list ul').append('<li><span class="pub-name-list">' + details.name + '</span><div class="pub-controls"><img src="http://image.ibb.co/b45EB6/Red_X_in_circle_small.png" class="pub-delete" alt="Click X to Remove Pub from List" border="0"></div></li>');
-            });
-
-      $('#directions').click(function(e) {
-        e.preventDefault();
+          $('#button').click(function(e) {
+            e.preventDefault();
+          $('#pub_list ul').append('<li>' +
+          '<span class="pub-name-list" id="' + details.geometry.location + '">' + details.name + '</span>' +
+          '<div class="pub-controls">' +
+          '<img src="http://image.ibb.co/b45EB6/Red_X_in_circle_small.png" class="pub-delete" alt="Click X to Remove Pub from List" border="0"></div></li>');
+          
+          delBtn();
+          });
+            
+          $('#directions').click(function(e) {
+            e.preventDefault();
           window.open('https://www.google.com/maps/dir/Current+Location/' + details.geometry.location);
-});
+          });
 
-            infoWindow.open(map, marker);
+          infoWindow.open(map, marker);
         });
 
         $('.my-pub-list').on('click', '.pub-delete', function(event) {
             $(this).closest('li').remove();
+            delBtn();
         });
     });
+}
+
+function delBtn() {
+  var mypub = $('#map_pub');
+
+  if ($('#pub_list ul li').length > 0) { 
+    mypub.empty().append('<button type="submit" role="link" id="map_my_pubs" class="main-btn">Map My Pubs</button>');
+  } else {
+    mypub.empty();
+  }
+}
+
+function getPubs() {
+  var dirURL = "https://www.google.com/maps/dir/Current+Location";
+      
+  $('#map_pub').click(function(e) {
+    e.preventDefault();
+  $("#pub_list span").each(function(index) {
+    dirURL += "/" + $(this).attr('id');
+  });
+    window.open(dirURL);
+  });
 }
 
 initMap();
