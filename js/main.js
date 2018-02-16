@@ -15,7 +15,7 @@ function initMap() {
         center: myLocation,
         zoom: 12,
         mapTypeId: 'roadmap',
-        styles: [
+        styles: [ // Below are styles of each map layer
           { "elementType": "geometry",
             "stylers": [{ "color": "#ebe3cd"}]},
           
@@ -133,14 +133,14 @@ function initMap() {
         map: map,
       });
       infoWindow.setPosition(pos);
-      infoWindow.setContent('You are here.');
+      infoWindow.setContent('You are here.'); // Change text for user's location marker
       map.setCenter(pos);
       
         var myLocation = pos; //Sets variable to geo location long and lat co-ordinates.
         var service = new google.maps.places.PlacesService(map);
           service.nearbySearch({
           location: myLocation, //Uses geolocation to find the following
-          radius: 100000,
+          radius: 100000, // Radius set to 100,000 feet from user's location
           keyword: ['bar', 'brewery', 'beer', 'liquor'],
           types: ['bar', 'restaurant']
           }, callback);
@@ -149,7 +149,7 @@ function initMap() {
   getPubs();
 }
 
-function callback(results, status) {
+function callback(results, status) { // For each location, run createMarker and set marker
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     results.forEach(createMarker);
  }
@@ -160,7 +160,7 @@ function createMarker(place) {
   var marker = new google.maps.Marker({
     map: map,
     icon: {
-      url: 'http://image.ibb.co/gR2wCR/beer_mug.png',
+      url: 'http://image.ibb.co/gR2wCR/beer_mug.png', // Beer mug icon
       anchor: new google.maps.Point(10, 10),
       scaledSize: new google.maps.Size(30, 36)
     },
@@ -183,6 +183,7 @@ function createMarker(place) {
           '<a href="' + details.url + '" class="pub-link">' + details.name + '</a>' +
           '<span class="right white">' + details.rating + '</span></div>' + 
           '<div class="pub-details">' + details.vicinity,
+//        ADDITIONAL OBJECTS RETURNED BY GOOGLE PLACES LIBRARY
 //        details.opening_hours.open_now = "Open Now",
 //        details.rating,
 //        details.place_id,
@@ -218,7 +219,7 @@ function createMarker(place) {
     });
 }
 
-function delBtn() {
+function delBtn() { // DELETES THE "MAP MY PUBS" BUTTON WHEN THERE ARE NO PUBS IN THE LIST
   var mypub = $('#map_pub');
 
   if ($('#pub_list ul li').length > 0) { 
@@ -228,7 +229,7 @@ function delBtn() {
   }
 }
 
-function getPubs() {
+function getPubs() { // GETS THE LIST OF PUBS AND LOADS DESTINATIONS INTO A GOOGLE MAP FOR DIRECTIONS
   var dirURL = "https://www.google.com/maps/dir/Current+Location";
       
   $('#map_pub').click(function(e) {
